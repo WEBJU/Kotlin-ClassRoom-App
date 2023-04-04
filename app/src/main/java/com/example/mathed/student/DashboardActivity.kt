@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import com.example.mathed.R
 import com.example.mathed.authentication.LoginStudentActivity
 import com.example.mathed.parent.DisplayAllActivity
@@ -14,9 +15,9 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-        val logoutButton = findViewById<Button>(R.id.logout)
-        val viewScores = findViewById<Button>(R.id.view_score)
-        val startTest = findViewById<Button>(R.id.start_test)
+        val logoutButton = findViewById<TextView>(R.id.logout)
+        val viewScores = findViewById<TextView>(R.id.view_score)
+        val startTest = findViewById<TextView>(R.id.start_test)
 
         viewScores.setOnClickListener {
             val intent = Intent(this, HistoryActivity::class.java)

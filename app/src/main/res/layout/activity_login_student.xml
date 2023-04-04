@@ -1,102 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_pic"
     tools:context=".authentication.LoginStudentActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="Log In"
-        android:textStyle="bold"
-        android:textSize="50sp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/Login"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="120dp"
-        android:background="@drawable/btn"
-        android:text="Login"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/SignUp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+            <!--            <TextView-->
+            <!--                android:layout_width="382dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginLeft="16dp"-->
+            <!--                android:layout_marginTop="15dp"-->
+            <!--                android:layout_marginRight="16dp"-->
 
-    <Button
-        android:id="@+id/parent_login"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="180dp"
-        android:background="@drawable/btn"
-        android:text="Parent Log In"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+            <!--                android:text="Log In"-->
+            <!--                android:textAlignment="center"-->
+            <!--                android:textColor="@color/accent_color"-->
+            <!--                android:textSize="24sp"-->
+            <!--                android:textStyle="bold" />-->
 
-    <Button
-        android:id="@+id/SignUp"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/btn"
-        android:text="Sign Up"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.576"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Username"
-        android:padding="20sp"
-        android:background="@drawable/bg"
-        android:textColorHint="#5A5858"
-        android:inputType="textPersonName"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:padding="20sp"
-        android:background="@drawable/bg"
-        android:hint="Password"
-        android:textColorHint="#5A5858"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="317dp"
+                android:layout_marginVertical="20dp"
+                app:srcCompat="@drawable/secure" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="373dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg"
+
+                android:drawablePadding="16dp"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:padding="16dp"
+                android:shadowColor="@color/background_color"
+                android:textColor="@color/black"
+                android:textColorHint="#8a8a8a"
+                android:textSize="20sp" />
+
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="376dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/bg"
+
+                android:drawablePadding="16dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="16dp"
+                android:shadowColor="@color/background_color"
+                android:textColor="@color/black"
+                android:textColorHint="#8a8a8a"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/fp"
+                android:layout_width="357dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:text="Forgot Password?"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="10dp">
+
+                <Button
+                    android:id="@+id/Login"
+                    android:layout_width="176dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn"
+                    android:text="Student"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/parent_login"
+                    android:layout_width="178dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn"
+                    android:text="Parent"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/SignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10sp"
+                android:text="Create an account"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
+
+
+    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@color/white"-->
+<!--    tools:context=".authentication.LoginStudentActivity">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:background="@drawable/top_background"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--    </LinearLayout>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:text="Log In"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="40sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/parent_login"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginBottom="128dp"-->
+<!--        android:background="@drawable/btn"-->
+<!--        android:text="Parent Log In"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="30sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.378"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+
+<!--    <Button-->
+<!--        android:id="@+id/SignUp"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginBottom="44dp"-->
+<!--        android:background="@drawable/btn"-->
+<!--        android:text="Sign Up"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="30sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.495"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cardView"-->
+<!--        android:layout_width="351dp"-->
+<!--        android:layout_height="294dp"-->
+<!--        android:layout_margin="20dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView"-->
+<!--        app:layout_constraintVertical_bias="0.068">-->
+
+
+<!--        <EditText-->
+<!--            android:id="@+id/username"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:background="@drawable/bg"-->
+<!--            android:ems="10"-->
+<!--            android:hint="Username"-->
+<!--            android:inputType="textPersonName"-->
+<!--            android:padding="20sp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textColorHint="#5A5858" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/password"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:layout_marginTop="120dp"-->
+<!--            android:background="@drawable/bg"-->
+<!--            android:ems="10"-->
+<!--            android:hint="Password"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:padding="20sp"-->
+<!--            android:textColorHint="#5A5858"-->
+
+<!--            />-->
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/Login"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:background="@drawable/btn"-->
+<!--        android:text="Login"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="30sp"-->
+<!--        android:textStyle="bold"-->
+<!--        tools:layout_editor_absoluteX="41dp"-->
+<!--        tools:layout_editor_absoluteY="478dp" />-->
+
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MathEd</string>
+    <string name="test_description">You will be taking a math test that consists of 10 multiple-choice questions covering various math topics. You will need to read each question carefully and select the correct answer from a list provided on your device screen.</string>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_pic"
     tools:context=".student.TestActivity">
 
     <ScrollView
@@ -11,12 +12,16 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="33dp">
+        tools:layout_editor_absoluteY="65dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:elevation="15dp"
+
+            android:layout_gravity="center"
+            android:background="@drawable/card"
             android:orientation="vertical">
 
             <RadioGroup
@@ -28,7 +33,7 @@
                 <TextView
                     android:id="@+id/question_No"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:text="Question 1"
                     android:textAlignment="center"
                     android:textColor="@color/black"
@@ -37,51 +42,66 @@
 
                 <TextView
                     android:id="@+id/question_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="369dp"
+                    android:layout_height="40dp"
+
+                    android:layout_marginStart="15dp"
+                    android:fontFamily="@font/mazzardhregular"
                     android:text="What is the capital of France?"
+                    android:textColor="@color/text_color_dark"
                     android:textSize="20dp" />
 
                 <RadioButton
                     android:id="@+id/question1_choice1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="266dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:text="Paris"
+                    android:textColor="#2e2c2a"
                     android:textSize="16dp" />
 
                 <RadioButton
                     android:id="@+id/question1_choice2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="265dp"
                     android:layout_height="wrap_content"
-                    android:text="London" />
+                    android:layout_marginStart="20dp"
+                    android:text="London"
+                    android:textColor="#2e2c2a"
+                    android:textSize="16dp" />
 
                 <RadioButton
                     android:id="@+id/question1_choice3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="268dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:text="New York"
+                    android:textColor="#2e2c2a"
                     android:textSize="16dp" />
 
                 <RadioButton
                     android:id="@+id/question1_choice4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="268dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:text="Tokyo"
+                    android:textColor="#2e2c2a"
                     android:textSize="16dp" />
 
             </RadioGroup>
 
-            <Button
+            <TextView
                 android:id="@+id/next"
                 android:layout_width="201dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/btn"
-                android:text="Next"
+                android:gravity="center"
+                android:background="@drawable/btn2"
+                android:text="NEXT"
+                android:elevation="15dp"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

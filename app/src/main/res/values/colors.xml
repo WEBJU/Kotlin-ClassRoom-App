@@ -7,4 +7,32 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primary">#E5E5E5E5</color>
+    <!-- Primary color: #2c3e50 (a dark blue that conveys stability and trust) -->
+    <color name="primary_color">#2c3e50</color>
+
+    <!-- Secondary color: #f39c12 (a bright orange that adds energy and excitement) -->
+    <color name="secondary_color">#f39c12</color>
+
+    <!-- Accent color: #27ae60 (a green that conveys growth and learning) -->
+    <color name="accent_color">#27ae60</color>
+
+    <!-- Background color: #f7f7f7 (a light gray that provides contrast for text and images) -->
+    <color name="background_color">#f7f7f7</color>
+
+    <!-- Text color: #333333 (a dark gray that is easily readable against the background color) -->
+    <color name="text_color">#333333</color>
+
+    <!-- Additional colors -->
+    <color name="primary_color_light">#5d81a6</color>
+    <color name="primary_color_dark">#1e2c3d</color>
+    <color name="secondary_color_light">#ffb347</color>
+    <color name="secondary_color_dark">#c77f0c</color>
+    <color name="accent_color_light">#6bb88c</color>
+    <color name="accent_color_dark">#1f7a46</color>
+    <color name="background_color_light">#f0f0f0</color>
+    <color name="background_color_dark">#e6e6e6</color>
+    <color name="text_color_light">#666666</color>
+    <color name="text_color_dark">#282828</color>
+    <color name="status_bar">#E8A73F</color>
 </resources>

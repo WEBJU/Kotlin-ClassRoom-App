@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:background="#e6b86e"
+    android:padding="16dp" android:layout_marginVertical="10dp">
 
     <TextView
         android:id="@+id/student_name_textview"
@@ -11,14 +13,17 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Name"
-        android:textSize="18sp"/>
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/score_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:textColor="@color/black"
         android:text="10"
-        android:textSize="18sp"/>
+
+        android:textSize="20sp"/>
 
 </LinearLayout>

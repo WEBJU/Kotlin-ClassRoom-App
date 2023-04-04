@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+  android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:background="#e6b86e"
+    android:padding="16dp"
+    android:layout_marginVertical="16dp"
+    >
 
 
     <LinearLayout
@@ -28,7 +31,7 @@
 
             <TextView
                 android:id="@+id/student_name"
-                android:layout_width="319dp"
+                android:layout_width="291dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="120dp"
@@ -44,7 +47,7 @@
 
             <TextView
                 android:id="@+id/textView9"
-                android:layout_width="85dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
@@ -55,7 +58,7 @@
 
             <TextView
                 android:id="@+id/average"
-                android:layout_width="97dp"
+                android:layout_width="273dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
                 android:paddingLeft="10dp"

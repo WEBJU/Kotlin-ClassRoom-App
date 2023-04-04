@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_pic"
     tools:context=".authentication.LoginStudentActivity">
 
 
@@ -14,7 +15,8 @@
         android:layout_marginTop="36dp"
         android:text="New student"
         android:textColor="@color/black"
-        android:textSize="50sp"
+
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
 
@@ -80,7 +82,7 @@
         android:background="@drawable/btn"
         android:text="Create Student"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.612"

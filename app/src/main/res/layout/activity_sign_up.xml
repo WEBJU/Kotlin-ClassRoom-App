@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_pic"
     tools:context=".authentication.LoginStudentActivity">
 
 
@@ -14,7 +15,7 @@
         android:layout_marginTop="36dp"
         android:text="Sign Up"
         android:textColor="@color/black"
-        android:textSize="50sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
 

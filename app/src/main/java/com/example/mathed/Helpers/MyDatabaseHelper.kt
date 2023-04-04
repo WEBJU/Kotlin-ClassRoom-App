@@ -250,7 +250,7 @@ class MyDatabaseHelper(private val context: Context) :
         val myScores = ArrayList<TTest>()
         val userId = getUserIdFromUsername()
 
-        val selectQuery = "SELECT * FROM TTest WHERE StudentId = $userId ORDER BY Id DESC"
+        val selectQuery = "SELECT Id, StudentId, Score, Date FROM TTest WHERE StudentId = $userId ORDER BY Id DESC"
         val db = readableDatabase
         val cursor = try {
             db.rawQuery(selectQuery, null)
@@ -270,8 +270,10 @@ class MyDatabaseHelper(private val context: Context) :
             val dateMillis = cursor.getLong(cursor.getColumnIndexOrThrow("Date"))
             val date = Date(dateMillis)
             val student = TTest(id, studentId, score,date)
+            Log.d("StudentScore",student.toString())
             myScores.add(student)
         }
+        Log.d("myscores" ,myScores.toString())
         cursor.close()
         db.close()
         return myScores
@@ -296,6 +298,7 @@ class MyDatabaseHelper(private val context: Context) :
             put("Score", score)
             put("Date", System.currentTimeMillis())
         }
+        Log.d("Scores",values.toString())
         val result = db.insert("TTest", null, values)
         db.close()
         return result != -1L

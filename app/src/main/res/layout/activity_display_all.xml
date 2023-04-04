@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_pic"
     tools:context=".parent.AllStudentScoreActivity">
 
 
@@ -27,6 +28,7 @@
         android:layout_marginTop="36dp"
         android:text="Student scores list"
         android:textColor="@color/black"
+        android:fontFamily="@font/lato_bold"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
