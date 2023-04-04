@@ -8,28 +8,29 @@ import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathed.R
 import com.example.mathed.data.TStudent
+import com.example.mathed.data.TTest
 
-class MyAdapter(private val studentList : ArrayList<TStudent>):
-    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class AllScoresAdapter(private val studentScore: ArrayList<TTest>):
+    RecyclerView.Adapter<AllScoresAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-       val itemView = LayoutInflater.from(parent.context).inflate(R.layout.all_students,parent,false)
+       val itemView = LayoutInflater.from(parent.context).inflate(R.layout.all_student_score,parent,false)
         return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-       val currentItem = studentList[position]
-        holder.nameText.text =currentItem.userName
+       val currentItem = studentScore[position]
+        holder.nameText.text =currentItem.score.toString()
 
     }
 
     override fun getItemCount(): Int {
 
-        return studentList.count()
+        return studentScore.count()
     }
     class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val nameText :TextView=itemView.findViewById(R.id.student_name_textview)
+        val nameText :TextView=itemView.findViewById(R.id.student_name)
 
     }
 

@@ -28,13 +28,13 @@ class DisplayAllActivity : AppCompatActivity() {
 
         if (newArrayList.isEmpty()) {
             // Show a message indicating that there are no students
-            val emptyText = findViewById<TextView>(R.id.textView5)
+            val emptyText = findViewById<TextView>(R.id.empty)
             emptyText.visibility = View.VISIBLE
             newRecyclerView.visibility = View.GONE
         } else {
             // Set up the adapter and show the RecyclerView
             val adapter = MyAdapter(newArrayList)
-            val emptyText = findViewById<TextView>(R.id.textView5)
+            val emptyText = findViewById<TextView>(R.id.empty)
             newRecyclerView.adapter = adapter
             emptyText.visibility = View.GONE
             newRecyclerView.visibility = View.VISIBLE

@@ -5,7 +5,8 @@
     android:orientation="horizontal"
     android:background="#e6b86e"
     android:padding="16dp"
-    android:layout_marginVertical="16dp"
+    android:layout_marginVertical="10dp"
+    android:layout_marginHorizontal="5dp"
     >
 
 
