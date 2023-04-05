@@ -6,6 +6,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import android.widget.Toast
 import com.example.mathed.data.TAnswer
 import com.example.mathed.data.TStudent
 import com.example.mathed.data.TTest
@@ -16,29 +17,40 @@ import kotlin.collections.ArrayList
 class MyDatabaseHelper(private val context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
+    fun isDatabaseImported(context: Context): Boolean {
+        val db = SQLiteDatabase.openDatabase(context.getDatabasePath(DATABASE_NAME).path, null, SQLiteDatabase.OPEN_READONLY)
+        val tableExistsQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='TParent'"
+        val tableExistsCursor = db.rawQuery(tableExistsQuery, null)
+        val tableExists = tableExistsCursor.moveToFirst()
+        tableExistsCursor.close()
+        db.close()
+        return tableExists
+    }
     companion object {
         private const val DATABASE_NAME = "AssignmentDB.db"
         private const val DATABASE_VERSION = 1
-        fun importDatabase(context: Context) {
-            val assetManager = context.assets
-            val input = assetManager.open(DATABASE_NAME)
-            val output = FileOutputStream(context.getDatabasePath(DATABASE_NAME))
 
-            val buffer = ByteArray(1024)
-            var length: Int = input.read(buffer)
-            while (length > 0) {
-                output.write(buffer, 0, length)
-                length = input.read(buffer)
-            }
+    }
+    fun importDatabase(context: Context) {
+        val assetManager = context.assets
+        val input = assetManager.open(DATABASE_NAME)
+        val output = FileOutputStream(context.getDatabasePath(DATABASE_NAME))
 
-            output.flush()
-            output.close()
-            input.close()
+        val buffer = ByteArray(1024)
+        var length: Int = input.read(buffer)
+        while (length > 0) {
+            output.write(buffer, 0, length)
+            length = input.read(buffer)
         }
+
+        output.flush()
+        output.close()
+        input.close()
     }
 
 
     override fun onCreate(db: SQLiteDatabase) {
+
         // Check if the database file exists on the device
         val databaseFile = context.getDatabasePath(DATABASE_NAME)
         if (databaseFile.exists()) {
@@ -121,6 +133,12 @@ class MyDatabaseHelper(private val context: Context) :
     }
 
     fun createUser(username: String, password: String): Boolean {
+        val status = isDatabaseImported(context)
+
+        if(!status){
+            importDatabase(context)
+        }
+
         val db = writableDatabase
         val contentValues = ContentValues().apply {
             put("UserName", username)
@@ -131,6 +149,11 @@ class MyDatabaseHelper(private val context: Context) :
         return result != -1L // return true if the insert was successful
     }
     fun createStudent(username: String, password: String): Boolean {
+        val status = isDatabaseImported(context)
+
+        if(!status){
+            importDatabase(context)
+        }
         val db = writableDatabase
         val contentValues = ContentValues().apply {
             put("UserName", username)
@@ -142,23 +165,39 @@ class MyDatabaseHelper(private val context: Context) :
     }
 
     fun authenticateUser(username: String, password: String): Boolean {
+        val status = isDatabaseImported(context)
+
+        if(!status){
+            importDatabase(context)
+        }
         val db = readableDatabase
         val query = "SELECT COUNT(*) FROM TParent WHERE UserName = ? AND UserPassWord = ?"
         val selectionArgs = arrayOf(username, password)
         val cursor = db.rawQuery(query, selectionArgs)
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
         cursor.moveToFirst()
-        val count = cursor.getInt(0)
         cursor.close()
         db.close()
         return count > 0 // return true if the user exists and the password matches
     }
     fun authenticateStudent(username: String, password: String): Boolean {
+        val status = isDatabaseImported(context)
+
+        if(!status){
+            importDatabase(context)
+        }
         val db = readableDatabase
         val query = "SELECT COUNT(*) FROM TStudent WHERE UserName = ? AND UserPassWord = ?"
         val selectionArgs = arrayOf(username, password)
         val cursor = db.rawQuery(query, selectionArgs)
+        var count = 0
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
         cursor.moveToFirst()
-        val count = cursor.getInt(0)
         cursor.close()
         db.close()
         return count > 0 // return true if the user exists and the password matches

@@ -95,26 +95,28 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="10dp">
 
-                <Button
+                <TextView
                     android:id="@+id/Login"
-                    android:layout_width="176dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="174dp"
+                    android:layout_height="45dp"
                     android:layout_margin="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/btn"
-                    android:text="Student"
+                    android:background="@drawable/btn2"
+                    android:gravity="center"
+                    android:text="STUDENT"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <Button
+                <TextView
                     android:id="@+id/parent_login"
-                    android:layout_width="178dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="171dp"
+                    android:layout_height="47dp"
                     android:layout_margin="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/btn"
-                    android:text="Parent"
+                    android:background="@drawable/btn2"
+                    android:gravity="center"
+                    android:text="PARENT"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />

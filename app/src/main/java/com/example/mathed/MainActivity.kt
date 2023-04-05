@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import com.example.mathed.Helpers.MyDatabaseHelper
 import com.example.mathed.authentication.LoginStudentActivity
 import com.example.mathed.parent.AllStudentScoreActivity
@@ -20,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         val dbHelper = MyDatabaseHelper(this)
         val answers = dbHelper.getAnswersForQuestion(1)
         val questionsAndAnswers = dbHelper.getQuestionsAndAnswers()
-        val logoutButton = findViewById<Button>(R.id.logout)
-        val createNew = findViewById<Button>(R.id.create_new)
-        val displayAll = findViewById<Button>(R.id.display_all)
-        val displayStudentScores = findViewById<Button>(R.id.student_scores)
-        val displayAllScores = findViewById<Button>(R.id.all_scores)
+        val logoutButton = findViewById<TextView>(R.id.logout)
+        val createNew = findViewById<TextView>(R.id.create_new)
+        val displayAll = findViewById<TextView>(R.id.display_all)
+        val displayStudentScores = findViewById<TextView>(R.id.student_scores)
+        val displayAllScores = findViewById<TextView>(R.id.all_scores)
 
         createNew.setOnClickListener {
             val intent = Intent(this, NewStudentActivity::class.java)

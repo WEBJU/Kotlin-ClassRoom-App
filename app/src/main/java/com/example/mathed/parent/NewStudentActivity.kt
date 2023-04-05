@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.mathed.Helpers.MyDatabaseHelper
 import com.example.mathed.MainActivity
@@ -20,7 +21,7 @@ class NewStudentActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.password)
         val confirmPasswordEditText = findViewById<EditText>(R.id.confirmPassword)
 
-        val signUpButton = findViewById<Button>(R.id.createButton)
+        val signUpButton = findViewById<TextView>(R.id.createButton)
 
 
         signUpButton.setOnClickListener {

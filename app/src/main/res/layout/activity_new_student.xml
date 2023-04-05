@@ -73,16 +73,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
-    <Button
+    <TextView
         android:id="@+id/createButton"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="44dp"
-        android:background="@drawable/btn"
-        android:text="Create Student"
+        android:background="@drawable/btn2"
+        android:text="CREATE STUDENT"
+        android:gravity="center"
+        android:fontFamily="@font/lato_bold"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.612"

@@ -22,14 +22,15 @@ class LoginStudentActivity : AppCompatActivity() {
         usernameEditText = findViewById(R.id.username)
         passwordEditText = findViewById(R.id.password)
 
-        val loginButton = findViewById<Button>(R.id.Login)
+        val loginButton = findViewById<TextView>(R.id.Login)
         val signUpButton = findViewById<TextView>(R.id.SignUp)
-        val parentLoginButton = findViewById<Button>(R.id.parent_login)
+        val parentLoginButton = findViewById<TextView>(R.id.parent_login)
+        val dbHelper = MyDatabaseHelper(this)
 
         parentLoginButton.setOnClickListener {
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
-            val dbHelper = MyDatabaseHelper(this)
+
             val authenticate = dbHelper.authenticateUser(username, password)
 
             if (authenticate) {
@@ -39,7 +40,7 @@ class LoginStudentActivity : AppCompatActivity() {
                 editor.putString("password", password)
                 editor.putString("role", "parent")
                 editor.apply()
-                Toast.makeText(this, "User created successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
@@ -51,7 +52,7 @@ class LoginStudentActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
-            val dbHelper = MyDatabaseHelper(this)
+
             val authenticate = dbHelper.authenticateStudent(username, password)
 
             if (authenticate) {
@@ -61,7 +62,7 @@ class LoginStudentActivity : AppCompatActivity() {
                 editor.putString("password", password)
                 editor.putString("role", "student")
                 editor.apply()
-                Toast.makeText(this, "User created successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, DashboardActivity::class.java)
                 startActivity(intent)
@@ -72,6 +73,7 @@ class LoginStudentActivity : AppCompatActivity() {
         }
 
         signUpButton.setOnClickListener {
+
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
             finish()
