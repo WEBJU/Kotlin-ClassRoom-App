@@ -1,29 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+    android:layout_margin="5dp"
     android:background="#e6b86e"
-    android:padding="16dp" android:layout_marginVertical="10dp">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/student_name_textview"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Name"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
+        android:layout_marginVertical="5dp"
+        android:background="#e6b86e"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
 
-    <TextView
-        android:id="@+id/score_textview"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/student_name_textview"
+            android:layout_width="281dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="@font/lato_bold"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:textColor="@color/black"
-        android:text="10"
+        android:layout_marginVertical="5dp"
+        android:background="#e6b86e"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
 
-        android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/Marks"
+            android:layout_width="224dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/lato_regular"
+            android:text="Marks"
+
+            android:textColor="@color/primary_color"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/score_textview"
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:fontFamily="@font/lato_regular"
+            android:gravity="center"
+            android:text="Test Date"
+            android:textColor="@color/primary_color"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_scores"
+        android:layout_width="332dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp" />
 
 </LinearLayout>

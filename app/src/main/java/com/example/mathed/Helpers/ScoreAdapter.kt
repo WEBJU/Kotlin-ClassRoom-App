@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mathed.R
 import com.example.mathed.data.StudentScore
 import com.example.mathed.data.TTest
+import java.text.SimpleDateFormat
+import java.util.*
 
-class ScoreAdapter(private val studentScores: ArrayList<TTest>):
+class ScoreAdapter(private val studentScores: List<Triple<String, Int, Long>>):
     RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
 
 
@@ -20,8 +22,11 @@ class ScoreAdapter(private val studentScores: ArrayList<TTest>):
 
     override fun onBindViewHolder(holder: ScoreViewHolder, position: Int) {
         val currentItem = studentScores[position]
-        holder.scoreText.text = currentItem.score.toString()
-        holder.dateText.text = currentItem.date.toString()
+        holder.scoreText.text = currentItem.second.toString()
+        val date = Date(currentItem.third)
+        val scoreDateFormat = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+        holder.dateText.text = scoreDateFormat.format(date).toString()
+
     }
 
     override fun getItemCount(): Int {

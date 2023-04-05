@@ -27,7 +27,8 @@ class StudentScoreActivity : AppCompatActivity() {
         val studentScores = mutableListOf<StudentScore>()
         for (studentId in scores.keys) {
             val name = scores[studentId]?.first()?.first ?: ""
-            val score = scores[studentId]?.map { it.second }?.sum() ?: 0
+            val score = scores[studentId]?.map { Pair(it.second, it.third) } ?: emptyList()
+
             val studentScore = StudentScore(studentId, name, score)
             Log.d("student", name + score + studentScore)
             studentScores.add(studentScore)

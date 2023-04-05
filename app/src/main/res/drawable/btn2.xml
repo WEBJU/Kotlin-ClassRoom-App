@@ -7,9 +7,9 @@
         </shape>
 
     </item>
-    <item android:state_enabled="true">
-        <shape android:shape="rectangle">
-            <gradient android:centerColor="#976603" android:endColor="#d99f00" android:startColor="#C37B12" />
+    <item android:state_enabled="true" >
+        <shape android:shape="rectangle" >
+            <gradient android:endColor="#E1C16E" android:centerColor="#E9AB17" android:startColor="#E9AB17" />
 <!--            <solid android:color="@color/black" />-->
             <corners android:radius="5dp" />
         </shape>

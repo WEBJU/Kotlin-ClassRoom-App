@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.core.content.ContextCompat
+import com.example.mathed.Helpers.MarksDialogFragment
 import com.example.mathed.Helpers.MyDatabaseHelper
 import com.example.mathed.R
 import com.example.mathed.data.TAnswer
@@ -15,7 +16,10 @@ class TestActivity : AppCompatActivity() {
     private var currentQuestionIndex = 0
     private var isAnswerSelected = false
     private var marks = 0
+    private var choiceId=-1
     private lateinit var questionsAndAnswers: List<Pair<String, List<TAnswer>>>
+    private lateinit var randomizedChoices: List<TAnswer>
+
     private lateinit var questionText: TextView
     private lateinit var questionNumber: TextView
     private lateinit var choice1: TextView
@@ -42,31 +46,35 @@ class TestActivity : AppCompatActivity() {
 
 
         nextButton.setOnClickListener {
-            if (!isAnswerSelected) {
+            if (choiceId == -1) {
                 Toast.makeText(this, "Please select an answer", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Exit the listener function if no answer is selected
             }
             if (currentQuestionIndex == 8) {
                 nextButton.text = "SUBMIT"
             }
+            handleAnswerSelection(choiceId)
             isAnswerSelected = false
             currentQuestionIndex++
 
             if (currentQuestionIndex < questionsAndAnswers.size) {
                 radioGrpBtn.clearCheck()
+                choiceId =-1
 
                 displayQuestion(currentQuestionIndex)
 
             } else {
 
+
                 val result = dbHelper.insertTTest(marks)
                 if (result) {
+                    val dialogFragment = MarksDialogFragment(marks)
+                    dialogFragment.show(supportFragmentManager, "marksDialog")
+//                    Toast.makeText(this, "Test submitted successfully", Toast.LENGTH_SHORT).show()
 
-                    Toast.makeText(this, "Test submitted successfully", Toast.LENGTH_SHORT).show()
-
-                    val intent = Intent(this, DashboardActivity::class.java)
-                    startActivity(intent)
-                    finish()
+//                    val intent = Intent(this, DashboardActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
                 } else {
                     Toast.makeText(this, "Error Submitting. Please Try Again..", Toast.LENGTH_SHORT)
                         .show()
@@ -77,23 +85,28 @@ class TestActivity : AppCompatActivity() {
         }
 
         choice1.setOnClickListener {
-            handleAnswerSelection(0)
+            choiceId=0
+//            handleAnswerSelection(0)
         }
         choice2.setOnClickListener {
-            handleAnswerSelection(1)
+            choiceId=1
+//            handleAnswerSelection(1)
         }
         choice3.setOnClickListener {
-            handleAnswerSelection(2)
+            choiceId=2
+//            handleAnswerSelection(2)
         }
         choice4.setOnClickListener {
-            handleAnswerSelection(3)
+            choiceId=3
+//            handleAnswerSelection(3)
         }
 
     }
 
     private fun handleAnswerSelection(answerIndex: Int) {
         isAnswerSelected = true
-        val selectedAnswer = questionsAndAnswers[currentQuestionIndex].second[answerIndex]
+        val selectedAnswer = randomizedChoices[answerIndex]
+
 
         if (selectedAnswer.isCorrect) {
             // Add marks for correct answer
@@ -118,7 +131,7 @@ class TestActivity : AppCompatActivity() {
         val choices = listOf(correctAnswer) + shuffledAnswers
 
         // Shuffle the choices again to randomize the order
-        val randomizedChoices = choices.shuffled()
+        randomizedChoices = choices.shuffled()
         questionText.text = question
         questionNumber.text = "Question " + (index + 1).toString()
         choice1.text = randomizedChoices[0].answerText

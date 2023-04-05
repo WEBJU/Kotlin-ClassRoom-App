@@ -11,17 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="65dp">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:elevation="15dp"
-
             android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+
             android:background="@drawable/card"
+            android:elevation="15dp"
             android:orientation="vertical">
 
             <RadioGroup
@@ -96,10 +96,10 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
-                android:gravity="center"
                 android:background="@drawable/btn2"
-                android:text="NEXT"
                 android:elevation="15dp"
+                android:gravity="center"
+                android:text="NEXT"
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -110,6 +110,7 @@
 
 
         </LinearLayout>
+
 
     </ScrollView>
 

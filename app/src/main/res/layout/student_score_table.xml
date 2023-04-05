@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="#e6b86e"
     android:orientation="vertical"
-    android:layout_marginVertical="10dp"
+    android:layout_marginVertical="5dp"
     android:padding="16dp">
 
 
@@ -21,7 +21,8 @@
 
             android:text="Score :"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/mazzardhbold"
             app:layout_constraintEnd_toStartOf="@+id/date"
             app:layout_constraintHorizontal_bias="0.081"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +32,10 @@
             android:id="@+id/score"
             android:layout_width="171dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
             android:layout_marginHorizontal="10dp"
             android:text="10/10"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
@@ -50,7 +53,8 @@
 
             android:text="Date :"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:fontFamily="@font/mazzardhbold"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/date"
             app:layout_constraintHorizontal_bias="0.211"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +64,9 @@
             android:id="@+id/date"
             android:layout_width="248dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="18dp"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="18sp"
             android:text="01/01/2023"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/score" />

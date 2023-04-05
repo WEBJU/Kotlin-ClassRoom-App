@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mathed.Helpers.MyDatabaseHelper
 import com.example.mathed.Helpers.ScoreAdapter
 import com.example.mathed.R
-import com.example.mathed.data.TTest
 
 class HistoryActivity : AppCompatActivity() {
 
     private lateinit var newRecyclerView: RecyclerView
     private lateinit var dbHelper: MyDatabaseHelper
-    private lateinit var newArrayList: ArrayList<TTest>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
@@ -25,7 +24,9 @@ class HistoryActivity : AppCompatActivity() {
         newRecyclerView.layoutManager = LinearLayoutManager(this)
         newRecyclerView.setHasFixedSize(true)
 
-        newArrayList= dbHelper.getMyScores()
+        val userId = dbHelper.getUserIdFromUsername()
+        val scoreList = dbHelper.getScoresGroupedByStudentId()
+        val newArrayList = scoreList[userId]?.sortedBy { it.third } ?: emptyList()
 
         if (newArrayList.isEmpty()) {
             // Show a message indicating that there are no students

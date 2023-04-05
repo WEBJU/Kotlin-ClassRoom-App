@@ -289,7 +289,7 @@ class MyDatabaseHelper(private val context: Context) :
         val myScores = ArrayList<TTest>()
         val userId = getUserIdFromUsername()
 
-        val selectQuery = "SELECT Id, StudentId, Score, Date FROM TTest WHERE StudentId = $userId ORDER BY Id DESC"
+        val selectQuery = "SELECT Id, StudentId, Score, Date FROM TTest WHERE StudentId == $userId ORDER BY Id DESC"
         val db = readableDatabase
         val cursor = try {
             db.rawQuery(selectQuery, null)
@@ -342,22 +342,24 @@ class MyDatabaseHelper(private val context: Context) :
         db.close()
         return result != -1L
     }
-    fun getScoresGroupedByStudentId(): Map<Int, List<Pair<String, Int>>> {
+    fun getScoresGroupedByStudentId(): Map<Int, List<Triple<String, Int,Long>>> {
         val db = readableDatabase
-        val selectQuery = "SELECT TTest.StudentId, TStudent.UserName, TTest.Score " +
+        val selectQuery = "SELECT TTest.StudentId,TTest.Date, TStudent.UserName, TTest.Score " +
                 "FROM TTest JOIN TStudent ON TTest.StudentId = TStudent.Id " +
                 "ORDER BY TTest.StudentId ASC"
         val cursor = db.rawQuery(selectQuery, null)
-        val scores = mutableMapOf<Int, MutableList<Pair<String, Int>>>()
+        val scores = mutableMapOf<Int, MutableList<Triple<String, Int,Long>>>()
         while (cursor.moveToNext()) {
             val studentId = cursor.getInt(cursor.getColumnIndexOrThrow("StudentId"))
             val name = cursor.getString(cursor.getColumnIndexOrThrow("UserName"))
             val score = cursor.getInt(cursor.getColumnIndexOrThrow("Score"))
+            val date = cursor.getLong(cursor.getColumnIndexOrThrow("Date"))
             if (!scores.containsKey(studentId)) {
-                scores[studentId] = mutableListOf(Pair(name, score))
+                scores[studentId] = mutableListOf(Triple(name, score,date))
             } else {
-                scores[studentId]?.add(Pair(name, score))
+                scores[studentId]?.add(Triple(name, score, date))
             }
+            Log.d("StudentScore",scores.toString())
         }
         cursor.close()
         db.close()

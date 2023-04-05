@@ -7,16 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mathed.Helpers.AllScoresAdapter
-import com.example.mathed.Helpers.MyAdapter
 import com.example.mathed.Helpers.MyDatabaseHelper
 import com.example.mathed.R
-import com.example.mathed.data.TStudent
-import com.example.mathed.data.TTest
 
 class AllStudentScoreActivity : AppCompatActivity() {
     private lateinit var newRecyclerView: RecyclerView
     private lateinit var dbHelper: MyDatabaseHelper
-    private lateinit var newArrayList: ArrayList<TTest>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +24,10 @@ class AllStudentScoreActivity : AppCompatActivity() {
         newRecyclerView.layoutManager = LinearLayoutManager(this)
         newRecyclerView.setHasFixedSize(true)
 
-        newArrayList = dbHelper.getAllStudentsScores()
+        val scoreList = dbHelper.getScoresGroupedByStudentId()
+        val newArrayList = scoreList.values.flatten().sortedBy { it.third }
+
+
 
         if (newArrayList.isEmpty()) {
             // Show a message indicating that there are no students
