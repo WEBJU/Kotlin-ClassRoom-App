@@ -18,19 +18,26 @@ class MyDatabaseHelper(private val context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     fun isDatabaseImported(context: Context): Boolean {
-        val db = SQLiteDatabase.openDatabase(context.getDatabasePath(DATABASE_NAME).path, null, SQLiteDatabase.OPEN_READONLY)
-        val tableExistsQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='TParent'"
+        val db = SQLiteDatabase.openDatabase(
+            context.getDatabasePath(DATABASE_NAME).path,
+            null,
+            SQLiteDatabase.OPEN_READONLY
+        )
+        val tableExistsQuery =
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='TParent'"
         val tableExistsCursor = db.rawQuery(tableExistsQuery, null)
         val tableExists = tableExistsCursor.moveToFirst()
         tableExistsCursor.close()
         db.close()
         return tableExists
     }
+
     companion object {
         private const val DATABASE_NAME = "AssignmentDB.db"
         private const val DATABASE_VERSION = 1
 
     }
+
     fun importDatabase(context: Context) {
         val assetManager = context.assets
         val input = assetManager.open(DATABASE_NAME)
@@ -78,21 +85,27 @@ class MyDatabaseHelper(private val context: Context) :
         // Get 10 random question IDs from the Tquestions table
         val questionCursor = db.rawQuery("SELECT * FROM TQuestion ORDER BY RANDOM() LIMIT 10", null)
 
-            while (questionCursor.moveToNext()) {
-                val questionId = questionCursor.getInt(questionCursor.getColumnIndex("Id"))
-                questionIds.add(questionId)
-                val questionText = questionCursor.getString(questionCursor.getColumnIndex("QuestionText"))
-                val answerCursor = db.rawQuery("SELECT * FROM TAnswer WHERE QuestionId = ?", arrayOf(questionId.toString()))
-                val answers = mutableListOf<TAnswer>()
-                while (answerCursor.moveToNext()) {
-                    val id = answerCursor.getInt(answerCursor.getColumnIndexOrThrow("Id"))
-                    val answerText = answerCursor.getString(answerCursor.getColumnIndexOrThrow("AnswerText"))
-                    val isCorrect = answerCursor.getInt(answerCursor.getColumnIndexOrThrow("IsCorrect")) == 1
-                    answers.add(TAnswer(id, questionId, answerText, isCorrect))
-                }
-                answerCursor.close()
-                questionsAndAnswers.add(questionText to answers)
+        while (questionCursor.moveToNext()) {
+            val questionId = questionCursor.getInt(questionCursor.getColumnIndex("Id"))
+            questionIds.add(questionId)
+            val questionText =
+                questionCursor.getString(questionCursor.getColumnIndex("QuestionText"))
+            val answerCursor = db.rawQuery(
+                "SELECT * FROM TAnswer WHERE QuestionId = ?",
+                arrayOf(questionId.toString())
+            )
+            val answers = mutableListOf<TAnswer>()
+            while (answerCursor.moveToNext()) {
+                val id = answerCursor.getInt(answerCursor.getColumnIndexOrThrow("Id"))
+                val answerText =
+                    answerCursor.getString(answerCursor.getColumnIndexOrThrow("AnswerText"))
+                val isCorrect =
+                    answerCursor.getInt(answerCursor.getColumnIndexOrThrow("IsCorrect")) == 1
+                answers.add(TAnswer(id, questionId, answerText, isCorrect))
             }
+            answerCursor.close()
+            questionsAndAnswers.add(questionText to answers)
+        }
 
 
         questionCursor.close()
@@ -135,72 +148,89 @@ class MyDatabaseHelper(private val context: Context) :
     fun createUser(username: String, password: String): Boolean {
         val status = isDatabaseImported(context)
 
-        if(!status){
+        if (!status) {
             importDatabase(context)
+            return false
+        }else{
+            return try{
+                val db = writableDatabase
+                val contentValues = ContentValues().apply {
+                    put("UserName", username)
+                    put("UserPassWord", password)
+                }
+                val result = db.insert("TParent", null, contentValues)
+                db.close()
+                result != -1L
+            }catch (e:Exception){
+                false
+            }
         }
 
-        val db = writableDatabase
-        val contentValues = ContentValues().apply {
-            put("UserName", username)
-            put("UserPassWord", password)
-        }
-        val result = db.insert("TParent", null, contentValues)
-        db.close()
-        return result != -1L // return true if the insert was successful
     }
+
     fun createStudent(username: String, password: String): Boolean {
         val status = isDatabaseImported(context)
 
-        if(!status){
+        if (!status) {
             importDatabase(context)
+            return false
+        }else{
+            return try{
+                val db = writableDatabase
+                val contentValues = ContentValues().apply {
+                    put("UserName", username)
+                    put("UserPassWord", password)
+                }
+                val result = db.insert("TStudent", null, contentValues)
+                db.close()
+                result != -1L
+            }catch (e:Exception){
+                false
+            }
         }
-        val db = writableDatabase
-        val contentValues = ContentValues().apply {
-            put("UserName", username)
-            put("UserPassWord", password)
-        }
-        val result = db.insert("TStudent", null, contentValues)
-        db.close()
-        return result != -1L // return true if the insert was successful
+        // return true if the insert was successful
     }
 
     fun authenticateUser(username: String, password: String): Boolean {
         val status = isDatabaseImported(context)
-
-        if(!status){
-            importDatabase(context)
-        }
-        val db = readableDatabase
-        val query = "SELECT COUNT(*) FROM TParent WHERE UserName = ? AND UserPassWord = ?"
-        val selectionArgs = arrayOf(username, password)
-        val cursor = db.rawQuery(query, selectionArgs)
         var count = 0
-        if (cursor.moveToFirst()) {
-            count = cursor.getInt(0)
+        if (!status) {
+            importDatabase(context)
+        } else {
+            val db = readableDatabase
+            val query = "SELECT COUNT(*) FROM TParent WHERE UserName = ? AND UserPassWord = ?"
+            val selectionArgs = arrayOf(username, password)
+            val cursor = db.rawQuery(query, selectionArgs)
+
+            if (cursor.moveToFirst()) {
+                count = cursor.getInt(0)
+            }
+            cursor.moveToFirst()
+            cursor.close()
+            db.close()
         }
-        cursor.moveToFirst()
-        cursor.close()
-        db.close()
         return count > 0 // return true if the user exists and the password matches
     }
+
     fun authenticateStudent(username: String, password: String): Boolean {
         val status = isDatabaseImported(context)
-
-        if(!status){
-            importDatabase(context)
-        }
-        val db = readableDatabase
-        val query = "SELECT COUNT(*) FROM TStudent WHERE UserName = ? AND UserPassWord = ?"
-        val selectionArgs = arrayOf(username, password)
-        val cursor = db.rawQuery(query, selectionArgs)
         var count = 0
-        if (cursor.moveToFirst()) {
-            count = cursor.getInt(0)
+        if (!status) {
+            importDatabase(context)
+        } else {
+            val db = readableDatabase
+            val query = "SELECT COUNT(*) FROM TStudent WHERE UserName = ? AND UserPassWord = ?"
+            val selectionArgs = arrayOf(username, password)
+            val cursor = db.rawQuery(query, selectionArgs)
+
+            if (cursor.moveToFirst()) {
+                count = cursor.getInt(0)
+            }
+            cursor.moveToFirst()
+            cursor.close()
+            db.close()
         }
-        cursor.moveToFirst()
-        cursor.close()
-        db.close()
-        return count > 0 // return true if the user exists and the password matches
+        return count > 0
     }
 
     fun checkUserExists(username: String): Boolean {
@@ -211,6 +241,7 @@ class MyDatabaseHelper(private val context: Context) :
         db.close()
         return exists
     }
+
     fun checkStudentExists(username: String): Boolean {
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT * FROM TStudent WHERE UserName = ?", arrayOf(username))
@@ -222,10 +253,10 @@ class MyDatabaseHelper(private val context: Context) :
 
     fun getAllStudents(): ArrayList<TStudent> {
         val students = ArrayList<TStudent>()
-        Log.d("Tag","before quewrt")
+        Log.d("Tag", "before quewrt")
         val selectQuery = "SELECT * FROM TStudent ORDER BY Id DESC"
         val db = readableDatabase
-        val cursor =  try {
+        val cursor = try {
             db.rawQuery(selectQuery, null)
         } catch (e: Exception) {
             Log.e("Tag", "Error executing query: ${e.message}")
@@ -234,7 +265,7 @@ class MyDatabaseHelper(private val context: Context) :
         }
         if (cursor.count == 0) {
 
-            Log.d("Tag","students db empty")
+            Log.d("Tag", "students db empty")
             cursor.close()
 
             db.close()
@@ -251,12 +282,13 @@ class MyDatabaseHelper(private val context: Context) :
         db.close()
         return students
     }
+
     fun getAllStudentsScores(): ArrayList<TTest> {
         val studentsScores = ArrayList<TTest>()
 
         val selectQuery = "SELECT * FROM TTest ORDER BY Id DESC"
         val db = readableDatabase
-        val cursor =  try {
+        val cursor = try {
             db.rawQuery(selectQuery, null)
         } catch (e: Exception) {
 
@@ -277,7 +309,7 @@ class MyDatabaseHelper(private val context: Context) :
             val score = cursor.getColumnIndexOrThrow("Score")
             val dateMillis = cursor.getLong(cursor.getColumnIndexOrThrow("Date"))
             val date = Date(dateMillis)
-            val student = TTest(id, studentId, score,date)
+            val student = TTest(id, studentId, score, date)
             studentsScores.add(student)
         }
         cursor.close()
@@ -289,7 +321,8 @@ class MyDatabaseHelper(private val context: Context) :
         val myScores = ArrayList<TTest>()
         val userId = getUserIdFromUsername()
 
-        val selectQuery = "SELECT Id, StudentId, Score, Date FROM TTest WHERE StudentId == $userId ORDER BY Id DESC"
+        val selectQuery =
+            "SELECT Id, StudentId, Score, Date FROM TTest WHERE StudentId == $userId ORDER BY Id DESC"
         val db = readableDatabase
         val cursor = try {
             db.rawQuery(selectQuery, null)
@@ -308,11 +341,11 @@ class MyDatabaseHelper(private val context: Context) :
             val score = cursor.getColumnIndexOrThrow("Score")
             val dateMillis = cursor.getLong(cursor.getColumnIndexOrThrow("Date"))
             val date = Date(dateMillis)
-            val student = TTest(id, studentId, score,date)
-            Log.d("StudentScore",student.toString())
+            val student = TTest(id, studentId, score, date)
+            Log.d("StudentScore", student.toString())
             myScores.add(student)
         }
-        Log.d("myscores" ,myScores.toString())
+        Log.d("myscores", myScores.toString())
         cursor.close()
         db.close()
         return myScores
@@ -320,7 +353,7 @@ class MyDatabaseHelper(private val context: Context) :
 
     fun getUserIdFromUsername(): Int {
         val sharedPrefs = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val username=sharedPrefs.getString("username", null)
+        val username = sharedPrefs.getString("username", null)
         val db = readableDatabase
         val selectQuery = "SELECT Id FROM TStudent WHERE username = ?"
         val cursor = db.rawQuery(selectQuery, arrayOf(username))
@@ -329,6 +362,7 @@ class MyDatabaseHelper(private val context: Context) :
         db.close()
         return userId
     }
+
     fun insertTTest(score: Int): Boolean {
         val userId = getUserIdFromUsername()
         val db = writableDatabase
@@ -337,29 +371,30 @@ class MyDatabaseHelper(private val context: Context) :
             put("Score", score)
             put("Date", System.currentTimeMillis())
         }
-        Log.d("Scores",values.toString())
+        Log.d("Scores", values.toString())
         val result = db.insert("TTest", null, values)
         db.close()
         return result != -1L
     }
-    fun getScoresGroupedByStudentId(): Map<Int, List<Triple<String, Int,Long>>> {
+
+    fun getScoresGroupedByStudentId(): Map<Int, List<Triple<String, Int, Long>>> {
         val db = readableDatabase
         val selectQuery = "SELECT TTest.StudentId,TTest.Date, TStudent.UserName, TTest.Score " +
                 "FROM TTest JOIN TStudent ON TTest.StudentId = TStudent.Id " +
                 "ORDER BY TTest.StudentId ASC"
         val cursor = db.rawQuery(selectQuery, null)
-        val scores = mutableMapOf<Int, MutableList<Triple<String, Int,Long>>>()
+        val scores = mutableMapOf<Int, MutableList<Triple<String, Int, Long>>>()
         while (cursor.moveToNext()) {
             val studentId = cursor.getInt(cursor.getColumnIndexOrThrow("StudentId"))
             val name = cursor.getString(cursor.getColumnIndexOrThrow("UserName"))
             val score = cursor.getInt(cursor.getColumnIndexOrThrow("Score"))
             val date = cursor.getLong(cursor.getColumnIndexOrThrow("Date"))
             if (!scores.containsKey(studentId)) {
-                scores[studentId] = mutableListOf(Triple(name, score,date))
+                scores[studentId] = mutableListOf(Triple(name, score, date))
             } else {
                 scores[studentId]?.add(Triple(name, score, date))
             }
-            Log.d("StudentScore",scores.toString())
+            Log.d("StudentScore", scores.toString())
         }
         cursor.close()
         db.close()
